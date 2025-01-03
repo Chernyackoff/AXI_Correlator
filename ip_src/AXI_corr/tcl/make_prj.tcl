@@ -48,9 +48,11 @@ update_compile_order -quiet -fileset sim_1
 set_property -name {xsim.simulate.runtime} -value {} -objects [get_filesets sim_1]
 
 update_compile_order -fileset sources_1
-set_property file_type {VHDL 2008} [get_files  C:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip_src/AXI_corr/src/planner.vhd]
-set_property file_type {VHDL 2008} [get_files  C:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip_src/AXI_corr/src/AXI_master.vhd]
-set_property file_type {VHDL 2008} [get_files  C:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip_src/AXI_corr/src/reader.vhd]
-set_property file_type {VHDL 2008} [get_files  C:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip_src/AXI_corr/src/bram_buf.vhd]
-set_property file_type {VHDL 2008} [get_files  C:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip_src/AXI_corr/src/correlator.vhd]
+set_property file_type {VHDL 2008} [get_files  ./src/planner.vhd]
+set_property file_type {VHDL 2008} [get_files  ./src/AXI_master.vhd]
+set_property file_type {VHDL 2008} [get_files  ./src/reader.vhd]
+set_property file_type {VHDL 2008} [get_files  ./src/bram_buf.vhd]
+set_property file_type {VHDL 2008} [get_files  ./src/correlator.vhd]
 update_compile_order -fileset sources_1
+
+source $script_path/package_project.tcl
