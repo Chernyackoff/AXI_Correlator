@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <spirit:vendor>xilinx.com</spirit:vendor>
+  <spirit:vendor>SigCorr</spirit:vendor>
   <spirit:library>user</spirit:library>
-  <spirit:name>AXI_corr_TOP</spirit:name>
-  <spirit:version>1.0</spirit:version>
+  <spirit:name>AXI_Correlator</spirit:name>
+  <spirit:version>0.2</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>
       <spirit:name>M_AXI</spirit:name>
@@ -726,14 +726,14 @@
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/AXI_corr_TOP_v1_0.tcl</spirit:name>
+        <spirit:name>xgui/AXI_Correlator_v0_2.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
         <spirit:userFileType>CHECKSUM_f64a5dae</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>AXI_corr_TOP_v1_0</spirit:description>
+  <spirit:description>Correlator for AXI</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
       <spirit:name>Component_Name</spirit:name>
@@ -772,17 +772,39 @@
       <xilinx:taxonomies>
         <xilinx:taxonomy>/UserIP</xilinx:taxonomy>
       </xilinx:taxonomies>
-      <xilinx:displayName>AXI_corr_TOP_v1_0</xilinx:displayName>
+      <xilinx:displayName>AXI_Correlator_v0_2</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2025-01-02T20:37:56Z</xilinx:coreCreationDateTime>
+      <xilinx:upgrades>
+        <xilinx:canUpgradeFrom>xilinx.com:user:AXI_corr_TOP:1.0</xilinx:canUpgradeFrom>
+      </xilinx:upgrades>
+      <xilinx:coreCreationDateTime>2025-01-03T15:49:58Z</xilinx:coreCreationDateTime>
+      <xilinx:tags>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6dbcd7f7_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7a05d261_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2229f84f_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@218af6e1_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50da3344_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@24afcc11_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@69d9fc7c_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4e5eac42_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1fe25110_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@71b32f59_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@25bcb9ee_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6907f804_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@154ea248_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@64a9a7a4_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5086ca48_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4f120fd1_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14aebc0a_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip</xilinx:tag>
+      </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2021.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="a5eb2d1e"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="fa820a90"/>
       <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="87f2977b"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="839aaf69"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="24d89d84"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="552470b5"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
