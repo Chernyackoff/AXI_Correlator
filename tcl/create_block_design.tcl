@@ -22,20 +22,9 @@ set_property location {1 102 -124} [get_bd_cells AXI_Corr_0]
 startgroup
 set_property -dict [list CONFIG.DATA_WIDTH {32}] [get_bd_cells axi_bram_ctrl_0]
 endgroup
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARADDR] [get_bd_pins axi_bram_ctrl_0/s_axi_araddr]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARLEN] [get_bd_pins axi_bram_ctrl_0/s_axi_arlen]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARSIZE] [get_bd_pins axi_bram_ctrl_0/s_axi_arsize]
-connect_bd_net [get_bd_pins axi_bram_ctrl_0/s_axi_arburst] [get_bd_pins AXI_Corr_0/M_AXI_ARBURST]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARLOCK] [get_bd_pins axi_bram_ctrl_0/s_axi_arlock]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARCACHE] [get_bd_pins axi_bram_ctrl_0/s_axi_arcache]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARPROT] [get_bd_pins axi_bram_ctrl_0/s_axi_arprot]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARVALID] [get_bd_pins axi_bram_ctrl_0/s_axi_arvalid]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_ARREADY] [get_bd_pins axi_bram_ctrl_0/s_axi_arready]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_RDATA] [get_bd_pins axi_bram_ctrl_0/s_axi_rdata]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_RRESP] [get_bd_pins axi_bram_ctrl_0/s_axi_rresp]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_RLAST] [get_bd_pins axi_bram_ctrl_0/s_axi_rlast]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_RVALID] [get_bd_pins axi_bram_ctrl_0/s_axi_rvalid]
-connect_bd_net [get_bd_pins AXI_Corr_0/M_AXI_RREADY] [get_bd_pins axi_bram_ctrl_0/s_axi_rready]
+update_compile_order -fileset sources_1
+connect_bd_intf_net [get_bd_intf_pins AXI_Corr_0/M_AXI] [get_bd_intf_pins axi_bram_ctrl_0/S_AXI]
+
 create_bd_port -dir I -type clk -freq_hz 250000000 refclk
 connect_bd_net [get_bd_ports refclk] [get_bd_pins AXI_Corr_0/refclk]
 create_bd_port -dir O result

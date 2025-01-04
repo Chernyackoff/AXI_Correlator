@@ -13,7 +13,7 @@ entity AXI_corr_TOP is
    --  Read address channel signals
     M_AXI_ARID          :   out STD_LOGIC_VECTOR(2 downto 0);
     M_AXI_ARADDR        :   out STD_LOGIC_VECTOR(31 downto 0);
-    M_AXI_ARLEN         :   out STD_LOGIC_VECTOR(3 downto 0);
+    M_AXI_ARLEN         :   out STD_LOGIC_VECTOR(7 downto 0);
     M_AXI_ARSIZE        :   out STD_LOGIC_VECTOR(2 downto 0);
     M_AXI_ARBURST       :   out STD_LOGIC_VECTOR(1 downto 0);
     M_AXI_ARLOCK        :   out STD_LOGIC_VECTOR(1 downto 0);
@@ -31,26 +31,6 @@ entity AXI_corr_TOP is
     M_AXI_RVALID        :   in  STD_LOGIC;
     M_AXI_RREADY        :   out STD_LOGIC;
 
-    
-    -- Fake channels to meet AXI4 requirements
-    M_AXI_AWADDR : OUT STD_LOGIC_VECTOR(14 downto 0);
-    M_AXI_AWBURST: OUT STD_LOGIC_VECTOR(1 downto 0);
-    M_AXI_AWCACHE: OUT STD_LOGIC_VECTOR(3 downto 0);
-    M_AXI_AWLEN  : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-    M_AXI_AWLOCK : OUT STD_LOGIC;
-    M_AXI_AWPROT : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
-    M_AXI_AWREADY: IN STD_LOGIC;
-    M_AXI_AWSIZE : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
-    M_AXI_AWVALID: OUT STD_LOGIC;
-    M_AXI_BREADY : OUT STD_LOGIC;
-    M_AXI_BRESP  : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-    M_AXI_BVALID : IN STD_LOGIC;
-    M_AXI_WDATA  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    M_AXI_WLAST  : OUT STD_LOGIC;
-    M_AXI_WREADY : IN STD_LOGIC;
-    M_AXI_WSTRB  : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-    M_AXI_WVALID : OUT STD_LOGIC;
-  
     result_o            :   out STD_LOGIC
   );
 end entity AXI_corr_TOP;
