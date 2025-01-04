@@ -27,8 +27,7 @@ begin
             if (rst) then
                 memory <= (OTHERS => 32B"0");
                 valid <= '0';
-            end if;
-            if (we) then
+            elsif (we) then
                 memory(to_integer(unsigned(addr))) <= data_i; -- TODO : to_integer если не сработает
                 valid <= '0';
             elsif (re) then
