@@ -46,6 +46,12 @@ startgroup
 create_bd_port -dir I -type rst rst
 endgroup
 connect_bd_net [get_bd_ports rst] [get_bd_pins AXI_Corr_0/rst]
+
+startgroup
+create_bd_port -dir I -type rst axi_aresetn
+endgroup
+connect_bd_net [get_bd_ports axi_aresetn] [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn]
+
 save_bd_design
 
 # wrapper adder
