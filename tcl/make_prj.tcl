@@ -23,7 +23,7 @@ if { [file exists $PROJECT_DIR] != 0 } {
 create_project $PROJECT_NAME $PROJECT_DIR -part $FPGA_PART 
 set_property target_language $TARGET_LANG [current_project] 
 set_property simulator_language $SIM_LANG [current_project] 
-set_property  ip_repo_paths  $__IP_PATH [current_project] 
+set_property  ip_repo_paths  $CURRENT_DIR/ip [current_project] 
  
 update_ip_catalog 
  
