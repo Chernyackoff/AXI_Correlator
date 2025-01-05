@@ -1,22 +1,32 @@
 
-library IEEE;--! standard library IEEE (Institute of Electrical and Electronics Engineers)
-use IEEE.std_logic_1164.all;--! standard unresolved logic UX01ZWLH-
-use IEEE.numeric_std.all;--! for the signed, unsigned types and arithmetic ops
+LIBRARY IEEE;--! standard library IEEE (Institute of Electrical and Electronics Engineers)
+USE IEEE.std_logic_1164.ALL;--! standard unresolved logic UX01ZWLH-
+USE IEEE.numeric_std.ALL;--! for the signed, unsigned types and arithmetic ops
 
-entity AXI_correlator_TOP is
-  port (
-    refclk : in std_logic;--! reference clock expect 250Mhz
-    rst    : in std_logic--! sync active high reset. sync -> refclk
+ENTITY AXI_correlator_TOP IS
+  PORT (
+    axi_aresetn : IN  STD_LOGIC;
+    result      : OUT STD_LOGIC;
+    refclk      : IN  STD_LOGIC;--! reference clock expect 250Mhz
+    rst         : IN  STD_LOGIC--! sync active high reset. sync -> refclk
   );
-end entity AXI_correlator_TOP;
-architecture rtl of AXI_correlator_TOP is
-  component AXI_CORR_design_wrapper is
-    port (
-      axi_aresetn : in std_logic;
-      refclk      : in std_logic;
-      result      : out std_logic;
-      rst         : in std_logic
+END ENTITY AXI_correlator_TOP;
+ARCHITECTURE rtl OF AXI_correlator_TOP IS
+  COMPONENT AXI_CORR_design_wrapper IS
+    PORT (
+      axi_aresetn : IN  STD_LOGIC;
+      refclk      : IN  STD_LOGIC;
+      result      : OUT STD_LOGIC;
+      rst         : IN  STD_LOGIC
     );
-  end component;
-begin
-end architecture rtl;
+  END COMPONENT;
+BEGIN
+
+  wrapper : AXI_CORR_design_wrapper PORT MAP(
+    axi_aresetn => axi_aresetn,
+    refclk      => refclk,
+    result      => result,
+    rst         => rst
+  );
+
+END ARCHITECTURE rtl;
