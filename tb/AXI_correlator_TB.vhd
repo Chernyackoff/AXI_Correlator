@@ -45,7 +45,7 @@ BEGIN
 
   test_bench_main : PROCESS
   BEGIN
-    test_completed <= true AFTER 50 ns;
+    test_completed <= true AFTER 200 ns;
     WAIT;
   END PROCESS test_bench_main;
 END ARCHITECTURE rtl;
