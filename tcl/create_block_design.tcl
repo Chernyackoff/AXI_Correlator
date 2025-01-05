@@ -42,8 +42,12 @@ endgroup
 connect_bd_net [get_bd_ports axi_aresetn] [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn]
 
 set dir [pwd]
+startgroup
+set_property -dict [list CONFIG.Load_Init_File {true} CONFIG.Coe_File {$dir/src/memory_init.coe}] [get_bd_cells blk_mem_gen_0]
+endgroup
+
 # startgroup
-# set_property -dict [list CONFIG.Load_Init_File {true} CONFIG.Coe_File {$dir/src/memory_init.coe}] [get_bd_cells blk_mem_gen_0]
+# set_property -dict [list CONFIG.Fill_Remaining_Memory_Locations {true} CONFIG.Remaining_Memory_Locations {0AA}] [get_bd_cells blk_mem_gen_0]
 # endgroup
 
 save_bd_design
@@ -54,5 +58,16 @@ make_wrapper -files [get_files $dir/AXI_correlator/AXI_correlator.srcs/sources_1
 
 add_files -norecurse $dir/AXI_correlator/AXI_correlator.gen/sources_1/bd/AXI_CORR_design/hdl/AXI_CORR_design_wrapper.vhd
 update_compile_order -fileset sources_1
+
+generate_target all [get_files  $dir/AXI_correlator/AXI_correlator.srcs/sources_1/bd/AXI_CORR_design/AXI_CORR_design.bd]
+catch { config_ip_cache -export [get_ips -all AXI_CORR_design_AXI_Corr_0_0] }
+catch { config_ip_cache -export [get_ips -all AXI_CORR_design_axi_bram_ctrl_0_0] }
+catch { config_ip_cache -export [get_ips -all AXI_CORR_design_blk_mem_gen_0_0] }
+export_ip_user_files -of_objects [get_files $dir/AXI_correlator/AXI_correlator.srcs/sources_1/bd/AXI_CORR_design/AXI_CORR_design.bd] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] $dir/AXI_correlator/AXI_correlator.srcs/sources_1/bd/AXI_CORR_design/AXI_CORR_design.bd]
+launch_runs AXI_CORR_design_AXI_Corr_0_0_synth_1 AXI_CORR_design_axi_bram_ctrl_0_0_synth_1 AXI_CORR_design_blk_mem_gen_0_0_synth_1 -jobs 10
+export_simulation -of_objects [get_files $dir/AXI_correlator/AXI_correlator.srcs/sources_1/bd/AXI_CORR_design/AXI_CORR_design.bd] -directory $dir/AXI_correlator/AXI_correlator.ip_user_files/sim_scripts -ip_user_files_dir $dir/AXI_correlator/AXI_correlator.ip_user_files -ipstatic_source_dir $dir/AXI_correlator/AXI_correlator.ip_user_files/ipstatic -lib_map_path [list {modelsim=$dir/AXI_correlator/AXI_correlator.cache/compile_simlib/modelsim} {questa=$dir/AXI_correlator/AXI_correlator.cache/compile_simlib/questa} {riviera=$dir/AXI_correlator/AXI_correlator.cache/compile_simlib/riviera} {activehdl=$dir/AXI_correlator/AXI_correlator.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+
+
 close_bd_design [get_bd_designs AXI_CORR_design]
 
