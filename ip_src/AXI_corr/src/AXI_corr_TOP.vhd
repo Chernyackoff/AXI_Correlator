@@ -114,9 +114,9 @@ architecture rtl of AXI_corr_TOP is
       axi_address      : OUT STD_LOGIC_VECTOR(31 downto 0); --! 
       axi_enabl        : OUT STD_LOGIC;
       flag             : OUT STD_LOGIC;
-      corr_enable      : OUT STD_LOGIC;
-      buff_ref         : IN STD_LOGIC; --! пустой ли буфер для референса
-      buff_seq         : IN STD_LOGIC --! пустой ли буфер для последовательности
+      corr_enable      : OUT STD_LOGIC
+      -- buff_ref         : IN STD_LOGIC; --! пустой ли буфер для референса
+      -- buff_seq         : IN STD_LOGIC --! пустой ли буфер для последовательности
     );
   end component;
   
@@ -142,9 +142,9 @@ begin
     axi_address   => axi_adr_w,       
     axi_enabl     => axi_en_w,        
     flag          => flag_w,             
-    corr_enable   => corr_en_w,      
-    buff_ref      => buff_ref_w,         
-    buff_seq      => buff_seq_w         
+    corr_enable   => corr_en_w      
+    -- buff_ref      => buff_ref_w,         
+    -- buff_seq      => buff_seq_w         
   ); 
 
   AXI_MM_module : AXI_master generic map ( axi_data_width_log2b => 5, axi_address_width_log2b => 5)

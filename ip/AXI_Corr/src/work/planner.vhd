@@ -12,9 +12,9 @@ PORT (
   axi_address      : OUT STD_LOGIC_VECTOR(31 downto 0); --! 
   axi_enabl        : OUT STD_LOGIC;
   flag             : OUT STD_LOGIC; -- ref\seq flag
-  corr_enable      : OUT STD_LOGIC;
-  buff_ref         : IN STD_LOGIC; --! пустой ли буфер для референса
-  buff_seq         : IN STD_LOGIC --! пустой ли буфер для последовательности
+  corr_enable      : OUT STD_LOGIC
+--   buff_ref         : IN STD_LOGIC; --! пустой ли буфер для референса
+--   buff_seq         : IN STD_LOGIC --! пустой ли буфер для последовательности
 );
 end entity planner;
 
@@ -39,9 +39,9 @@ begin
             axi_enabl <='0';
             flag <='0';
             corr_enable <='0';
-            if (buff_ref = '1' and buff_seq = '1') then
+            -- if (buff_ref = '1' and buff_seq = '1') then
                 fsm <= read_seq;
-            end if; 
+            -- end if; 
         when read_seq =>
             axi_address<= "00100000001000000010000000100000"; --! i don`t know :()
             axi_enabl <='1';
