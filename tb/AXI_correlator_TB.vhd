@@ -3,35 +3,41 @@ LIBRARY IEEE;--! standard library IEEE (Institute of Electrical and Electronics 
 USE IEEE.std_logic_1164.ALL;--! standard unresolved logic UX01ZWLH-
 USE IEEE.numeric_std.ALL;--! for the signed, unsigned types and arithmetic ops
 
-entity AXI_correlator_TB is
+ENTITY AXI_correlator_TB IS
   GENERIC (
     EDGE_CLK : TIME := 2 ns
   );
-end entity AXI_correlator_TB;
-architecture rtl of AXI_correlator_TB is
-  SIGNAL rst   : STD_LOGIC := '0';
-  SIGNAL refclk : STD_LOGIC := '0';
-  SIGNAL test_completed : BOOLEAN := false;
-    COMPONENT AXI_correlator_TOP IS
-      PORT (
-        refclk : IN  STD_LOGIC;--! reference clock expect 250Mhz
-        rst    : IN  STD_LOGIC--! sync active high reset. sync -> refclk
-      );
-    END COMPONENT;
-begin
+END ENTITY AXI_correlator_TB;
+ARCHITECTURE rtl OF AXI_correlator_TB IS
+  SIGNAL rst            : STD_LOGIC := '1';
+  SIGNAL refclk         : STD_LOGIC := '0';
+  SIGNAL test_completed : BOOLEAN   := false;
+  SIGNAL axi_reset      : STD_LOGIC := '1';
+  SIGNAL res            : STD_LOGIC;
+  COMPONENT AXI_correlator_TOP IS
+    PORT (
+      axi_aresetn : IN  STD_LOGIC;
+      result      : OUT STD_LOGIC;
+      refclk      : IN  STD_LOGIC;--! reference clock expect 250Mhz
+      rst         : IN  STD_LOGIC--! sync active high reset. sync -> refclk
+    );
+  END COMPONENT;
+BEGIN
 
   AXI_correlator_TOP_inst : AXI_correlator_TOP
   PORT MAP
   (
-    refclk => refclk,
-    rst    => rst
+    axi_aresetn => axi_reset,
+    result      => res,
+    refclk      => refclk,
+    rst         => rst
   );
 
   test_clk_generator : PROCESS
   BEGIN
     IF NOT test_completed THEN
       refclk <= NOT refclk;
-      WAIT for EDGE_CLK;
+      WAIT FOR EDGE_CLK;
     ELSE
       WAIT;
     END IF;
@@ -42,4 +48,4 @@ begin
     test_completed <= true AFTER 50 ns;
     WAIT;
   END PROCESS test_bench_main;
-end architecture rtl;
+END ARCHITECTURE rtl;

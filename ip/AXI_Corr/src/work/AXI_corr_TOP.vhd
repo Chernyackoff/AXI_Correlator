@@ -162,7 +162,7 @@ BEGIN
     M_AXI_ACLK    => M_AXI_ACLK,
     M_AXI_ARID    => M_AXI_ARID,
     M_AXI_ARADDR  => M_AXI_ARADDR,
-    M_AXI_ARLEN   => M_AXI_ARLEN(3 downto 0),
+    M_AXI_ARLEN   => M_AXI_ARLEN(3 DOWNTO 0),
     M_AXI_ARSIZE  => M_AXI_ARSIZE,
     M_AXI_ARBURST => M_AXI_ARBURST,
     M_AXI_ARLOCK  => M_AXI_ARLOCK,
@@ -182,7 +182,7 @@ BEGIN
 
   reference_buf : bram_buf PORT MAP(
     refclk => refclk,        --! reference clock expect 250Mhz
-    rst    => rst_w,           --! sync active high reset. sync -> refclk
+    rst    => rst_w,         --! sync active high reset. sync -> refclk
     addr   => ref_buf_adr_w, -- адрес ячейки в буфере (от 0 до 14)
     re     => ref_re_w,      -- read enable
     we     => ref_we_w,      -- write enable (поднять для записи)
@@ -193,7 +193,7 @@ BEGIN
 
   signal_bufer : bram_buf PORT MAP(
     refclk => refclk,        --! reference clock expect 250Mhz
-    rst    => rst_w,           --! sync active high reset. sync -> refclk
+    rst    => rst_w,         --! sync active high reset. sync -> refclk
     addr   => sig_buf_adr_w, -- адрес ячейки в буфере (от 0 до 14)
     re     => sig_re_w,      -- read enable
     we     => sig_we_w,      -- write enable (поднять для записи)
