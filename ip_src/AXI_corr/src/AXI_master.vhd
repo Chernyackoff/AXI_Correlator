@@ -1,95 +1,95 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
 
-entity AXI_master is
-  generic (
-    axi_data_width_log2b    : natural range 5 to 255 := 6;
-    axi_address_width_log2b : natural range 5 to 255 := 5
+ENTITY AXI_master IS
+  GENERIC (
+    axi_data_width_log2b    : NATURAL RANGE 5 TO 255 := 6;
+    axi_address_width_log2b : NATURAL RANGE 5 TO 255 := 5
   );
-  port (
-    refclk : in std_logic;--! reference clock expect 250Mhz
-    rst    : in std_logic;--! sync active high reset. sync -> refclk
+  PORT (
+    refclk : IN STD_LOGIC;--! reference clock expect 250Mhz
+    rst    : IN STD_LOGIC;--! sync active high reset. sync -> refclk
     --сигналы для соединения с планировщиком и правильной работы (наверное :)
-    read_data     : out std_logic_vector(31 downto 0); --!эти данные мы записываем в буффер
-    read_start    : in std_logic; --! это соединяется с axi_enable от планировщика
-    read_complete : out std_logic;
-    read_result   : out std_logic_vector(1 downto 0);
-    read_addr     : in std_logic_vector(31 downto 0);
-    write_addr    : out std_logic_vector(3 downto 0);
+    read_data     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --!эти данные мы записываем в буффер
+    read_start    : IN  STD_LOGIC;                     --! это соединяется с axi_enable от планировщика
+    read_complete : OUT STD_LOGIC;
+    read_result   : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+    read_addr     : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+    write_addr    : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
     -- Global Signals
-    M_AXI_ACLK : out std_logic;
+    M_AXI_ACLK : OUT STD_LOGIC;
     --  Read address channel signals
-    M_AXI_ARID    : out std_logic_vector(2 downto 0);
-    M_AXI_ARADDR  : out std_logic_vector(2 ** axi_address_width_log2b - 1 downto 0);
-    M_AXI_ARLEN   : out std_logic_vector(3 downto 0);
-    M_AXI_ARSIZE  : out std_logic_vector(2 downto 0);
-    M_AXI_ARBURST : out std_logic_vector(1 downto 0);
-    M_AXI_ARLOCK  : out std_logic_vector(1 downto 0);
-    M_AXI_ARCACHE : out std_logic_vector(3 downto 0);
-    M_AXI_ARPROT  : out std_logic_vector(2 downto 0);
-    M_AXI_ARQOS   : out std_logic_vector(3 downto 0);
-    M_AXI_ARUSER  : out std_logic_vector(4 downto 0);
-    M_AXI_ARVALID : out std_logic;
-    M_AXI_ARREADY : in std_logic;
+    M_AXI_ARID    : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+    M_AXI_ARADDR  : OUT STD_LOGIC_VECTOR(2 ** axi_address_width_log2b - 1 DOWNTO 0);
+    M_AXI_ARLEN   : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+    M_AXI_ARSIZE  : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+    M_AXI_ARBURST : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+    M_AXI_ARLOCK  : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+    M_AXI_ARCACHE : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+    M_AXI_ARPROT  : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+    M_AXI_ARQOS   : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+    M_AXI_ARUSER  : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
+    M_AXI_ARVALID : OUT STD_LOGIC;
+    M_AXI_ARREADY : IN  STD_LOGIC;
     -- Read data channel signals
-    M_AXI_RID    : in std_logic_vector(2 downto 0);
-    M_AXI_RDATA  : in std_logic_vector(2 ** axi_data_width_log2b - 1 downto 0);
-    M_AXI_RRESP  : in std_logic_vector(1 downto 0);
-    M_AXI_RLAST  : in std_logic;
-    M_AXI_RVALID : in std_logic;
-    M_AXI_RREADY : out std_logic
+    M_AXI_RID    : IN  STD_LOGIC_VECTOR(2 DOWNTO 0);
+    M_AXI_RDATA  : IN  STD_LOGIC_VECTOR(2 ** axi_data_width_log2b - 1 DOWNTO 0);
+    M_AXI_RRESP  : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
+    M_AXI_RLAST  : IN  STD_LOGIC;
+    M_AXI_RVALID : IN  STD_LOGIC;
+    M_AXI_RREADY : OUT STD_LOGIC
 
   );
-end entity AXI_master;
+END ENTITY AXI_master;
 
-architecture master of AXI_master is
-  signal read_complete_w          : std_logic;
-  signal counter                  : integer range 0 to 14 := 0;
-  signal read_addr_w, read_data_w : std_logic_vector(31 downto 0);
-begin
+ARCHITECTURE master OF AXI_master IS
+  SIGNAL read_complete_w          : STD_LOGIC;
+  SIGNAL counter                  : INTEGER RANGE 0 TO 14 := 0;
+  SIGNAL read_addr_w, read_data_w : STD_LOGIC_VECTOR(31 DOWNTO 0);
+BEGIN
   --нашла на просторах инета (мб как-то иначе надо)
   M_AXI_ACLK   <= refclk;
-  M_AXI_ARQOS  <= (others => '0');
-  M_AXI_ARLOCK <= (others => '0');
-  M_AXI_ARPROT <= (others => '0');
-  M_AXI_ARID   <= (others => '0');
+  M_AXI_ARQOS  <= (OTHERS => '0');
+  M_AXI_ARLOCK <= (OTHERS => '0');
+  M_AXI_ARPROT <= (OTHERS => '0');
+  M_AXI_ARID   <= (OTHERS => '0');
 
   --ТУТ возможно надо что-то добавить (запись в буфер принятых данных, ответ планировщику ?)
-  send_data : process (refclk, read_complete_w)
-  begin
-    if (rst = '1') then
-      read_addr_w <= 32B"ZZZZ";
-      write_addr <= "0000";
-      read_data <= 32B"0";
+  send_data : PROCESS (refclk, read_complete_w)
+  BEGIN
+    IF (rst = '1') THEN
+      read_addr_w   <= 32B"ZZZZ";
+      write_addr    <= "0000";
+      read_data     <= 32B"0";
       read_complete <= '0';
-      counter <= 0;
-    elsif (read_start) then
-      read_addr_w   <= std_logic_vector(to_unsigned(to_integer(unsigned(read_addr)) + counter * 4, 32));
-      write_addr    <= std_logic_vector(to_unsigned(counter, 4));
+      counter       <= 0;
+    ELSIF (read_start) THEN
+      read_addr_w   <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(read_addr)) + counter * 4, 32));
+      write_addr    <= STD_LOGIC_VECTOR(to_unsigned(counter, 4));
       read_data     <= read_data_w;
       read_complete <= '0';
-      if (rising_edge(read_complete_w)) then
-        if (counter = 14) then
+      IF (rising_edge(read_complete_w)) THEN
+        IF (counter = 14) THEN
           counter       <= 0;
           read_complete <= '1';
-        else
+        ELSE
           counter <= counter + 1;
-        end if;
-      end if;
-    else
+        END IF;
+      END IF;
+    ELSE
       read_addr_w   <= 32B"ZZZZ";
       read_complete <= '0';
-    end if;
-  end process;
+    END IF;
+  END PROCESS;
 
   -- reader
-  reader : entity work.reader
-    generic map(
+  reader : ENTITY work.reader
+    GENERIC MAP(
       axi_data_width_log2b    => axi_data_width_log2b,
       axi_address_width_log2b => axi_address_width_log2b
     )
-    port map
+    PORT MAP
     (
       refclk        => refclk,
       rst           => rst,
@@ -112,4 +112,4 @@ begin
       M_AXI_RVALID  => M_AXI_RVALID,
       M_AXI_RREADY  => M_AXI_RREADY
     );
-end architecture master;
+END ARCHITECTURE master;

@@ -24,7 +24,7 @@ begin
     process (refclk) 
     begin
         if (rising_edge(refclk)) then
-            if (rst) then
+            if (rst = '1') then
                 memory <= (OTHERS => 32B"0");
                 valid <= '0';
             elsif (we) then
