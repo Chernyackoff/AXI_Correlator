@@ -42,13 +42,13 @@ endgroup
 connect_bd_net [get_bd_ports axi_aresetn] [get_bd_pins axi_bram_ctrl_0/s_axi_aresetn]
 
 set dir [pwd]
-startgroup
-set_property -dict [list CONFIG.Load_Init_File {true} CONFIG.Coe_File {$dir/src/memory_init.coe}] [get_bd_cells blk_mem_gen_0]
-endgroup
-
 # startgroup
-# set_property -dict [list CONFIG.Fill_Remaining_Memory_Locations {true} CONFIG.Remaining_Memory_Locations {0AA}] [get_bd_cells blk_mem_gen_0]
+# set_property -dict [list CONFIG.Load_Init_File {true} CONFIG.Coe_File {$dir/src/memory_init.coe}] [get_bd_cells blk_mem_gen_0]
 # endgroup
+
+startgroup
+set_property -dict [list CONFIG.Fill_Remaining_Memory_Locations {true} CONFIG.Remaining_Memory_Locations {0AA}] [get_bd_cells blk_mem_gen_0]
+endgroup
 
 save_bd_design
 

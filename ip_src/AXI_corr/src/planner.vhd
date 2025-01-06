@@ -37,7 +37,7 @@ BEGIN
   main_FSM : PROCESS (refclk)
   BEGIN
     IF rising_edge(refclk) THEN
-      next_state <= cur_state;
+      -- next_state <= cur_state;
       CASE cur_state IS
         WHEN idle =>
           axi_address <= (OTHERS => '0');
@@ -65,8 +65,10 @@ BEGIN
           END IF;
 
         WHEN corr =>
+          axi_enabl  <= '0';
           corr_enable <= '1';
           IF (corr_DONE = '1') THEN
+            corr_enable <= '0';
             next_state <= idle;
           END IF;
         WHEN OTHERS => next_state <= idle;

@@ -1,4 +1,10 @@
 #setting env 
+if {[info exists PROJECT_NAME]} { 
+	unset PROJECT_NAME
+} 
+if {[info exists PROJECT_DIR]} { 
+	unset PROJECT_DIR
+} 
 set script_path [ file dirname [ file normalize [ info script ] ] ] 
 cd $script_path 
 cd ../ 

@@ -111,12 +111,29 @@ BEGIN
     ELSE
       shift_modifier := 0;
     END IF;
-    read_data    <= read_data_store(read_data'left + shift_modifier * 8 DOWNTO shift_modifier * 8);
+    -- read_data    <= read_data_store;
     read_result  <= read_result_store;
     M_AXI_ARADDR <= (M_AXI_ARADDR'left DOWNTO read_addr_store'left + 1 => '0') & read_addr_store(read_addr_store'left DOWNTO axi_data_width_log2b - 3) & (axi_data_width_log2b - 4 DOWNTO 0 => '0');
     -- 2**axi_data_width_log2b / 8 bytes per transfer
     M_AXI_ARSIZE <= STD_LOGIC_VECTOR(to_unsigned(axi_data_width_log2b - 3, M_AXI_ARSIZE'length));
   END PROCESS;
+
+  data_assignment : PROCESS (refclk)
+  BEGIN
+    M_AXI_RREADY <= '1';
+    IF rising_edge(refclk) THEN
+      IF rst = '1' THEN
+        read_data <= 32B"0";
+        -- M_AXI_RREADY <= '0';
+      ELSE
+        IF (M_AXI_RVALID = '1') THEN
+          read_data <= M_AXI_RDATA;
+        ELSE
+          -- M_AXI_RREADY <= '0';
+        END IF;
+      END IF;
+    END IF;
+  END PROCESS data_assignment;
 
   -- The state decides the output
   output_decider : PROCESS (cur_state, M_AXI_RDATA, read_addr, M_AXI_RRESP)
@@ -125,35 +142,30 @@ BEGIN
       WHEN rst_state =>
         read_complete      <= '0';
         M_AXI_ARVALID      <= '0';
-        M_AXI_RREADY       <= '0';
         update_read_data   <= false;
         update_read_addr   <= false;
         update_read_result <= false;
       WHEN wait_for_start =>
         read_complete      <= '1';
         M_AXI_ARVALID      <= '0';
-        M_AXI_RREADY       <= '0';
         update_read_data   <= false;
         update_read_addr   <= true;
         update_read_result <= false;
       WHEN assert_arvalid =>
         read_complete      <= '0';
         M_AXI_ARVALID      <= '1';
-        M_AXI_RREADY       <= '0';
         update_read_data   <= true;
         update_read_addr   <= false;
         update_read_result <= true;
       WHEN wait_for_rvalid_rise =>
         read_complete      <= '0';
         M_AXI_ARVALID      <= '0';
-        M_AXI_RREADY       <= '0';
         update_read_data   <= true;
         update_read_addr   <= false;
         update_read_result <= true;
       WHEN wait_for_rvalid_fall =>
         read_complete      <= '0';
         M_AXI_ARVALID      <= '0';
-        M_AXI_RREADY       <= '1';
         update_read_data   <= true;
         update_read_addr   <= false;
         update_read_result <= true;

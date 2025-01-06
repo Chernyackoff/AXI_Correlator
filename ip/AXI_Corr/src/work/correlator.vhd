@@ -49,10 +49,9 @@ BEGIN
   BEGIN
     IF (rising_edge(refclk)) THEN
       IF (en) THEN
-        next_state <= cur_state;
         CASE(cur_state) IS
           WHEN idle =>
-          next_state <= idle;
+          next_state <= working;
 
           WHEN working =>
           IF (work_ended) THEN
@@ -76,15 +75,20 @@ BEGIN
   PROCESS (refclk)
   BEGIN
     IF (rising_edge(refclk)) THEN
-      IF (counter <= 14 AND en = '1' AND cur_state = working) THEN
-        ref_addr <= STD_LOGIC_VECTOR(to_unsigned(counter, 4));
-        bram_re  <= '1';
-        IF (valid) THEN
-          data_ready <= true;
-          data_ref   <= ref_input;
-          data_sig   <= signal_input;
-        ELSE
-          data_ready <= false;
+      IF (cur_state /= working) THEN
+        ref_addr <= 4B"Z";
+        bram_re  <= '0';
+      ELSE
+        IF (counter <= 14) THEN
+          ref_addr <= STD_LOGIC_VECTOR(to_unsigned(counter, 4));
+          bram_re  <= '1';
+          IF (valid) THEN
+            data_ready <= true;
+            data_ref   <= ref_input;
+            data_sig   <= signal_input;
+          ELSE
+            data_ready <= false;
+          END IF;
         END IF;
       END IF;
     END IF;
@@ -135,7 +139,6 @@ BEGIN
           corr_end <= '0';
         END IF;
       ELSE
-        result   <= 'Z';
         corr_end <= '0';
       END IF;
 

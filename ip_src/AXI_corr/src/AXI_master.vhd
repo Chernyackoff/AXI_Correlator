@@ -64,22 +64,24 @@ BEGIN
       read_data     <= 32B"0";
       read_complete <= '0';
       counter       <= 0;
-    ELSIF (read_start) THEN
-      read_addr_w   <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(read_addr)) + counter * 4, 32));
-      write_addr    <= STD_LOGIC_VECTOR(to_unsigned(counter, 4));
-      read_data     <= read_data_w;
-      read_complete <= '0';
-      IF (rising_edge(read_complete_w)) THEN
-        IF (counter = 14) THEN
-          counter       <= 0;
-          read_complete <= '1';
-        ELSE
-          counter <= counter + 1;
+    ELSIF (rising_edge(refclk)) THEN
+      IF (read_start = '1') THEN
+        read_addr_w   <= STD_LOGIC_VECTOR(to_unsigned(to_integer(unsigned(read_addr)) + counter * 4, 32));
+        write_addr    <= STD_LOGIC_VECTOR(to_unsigned(counter, 4));
+        read_data     <= read_data_w;
+        read_complete <= '0';
+        IF (read_complete_w = '1') THEN
+          IF (counter = 14) THEN
+            counter       <= 0;
+            read_complete <= '1';
+          ELSE
+            counter <= counter + 1;
+          END IF;
         END IF;
+      ELSE
+        read_addr_w   <= 32B"ZZZZ";
+        read_complete <= '0';
       END IF;
-    ELSE
-      read_addr_w   <= 32B"ZZZZ";
-      read_complete <= '0';
     END IF;
   END PROCESS;
 

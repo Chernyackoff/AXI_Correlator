@@ -124,6 +124,7 @@ ARCHITECTURE rtl OF AXI_corr_TOP IS
   -- logic wires planner to others
   SIGNAL read_cmplt_w, corr_DONE_w, axi_en_w, flag_w, corr_en_w, buff_ref_w, buff_seq_w : STD_LOGIC;
   SIGNAL axi_adr_w                                                                      : STD_LOGIC_VECTOR(31 DOWNTO 0);
+  SIGNAL ARLEN_W                                                                        : STD_LOGIC_VECTOR(3 DOWNTO 0);
 
   -- data wires
   SIGNAL data_from_axi_w : STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -162,7 +163,7 @@ BEGIN
     M_AXI_ACLK    => M_AXI_ACLK,
     M_AXI_ARID    => M_AXI_ARID,
     M_AXI_ARADDR  => M_AXI_ARADDR,
-    M_AXI_ARLEN   => M_AXI_ARLEN(3 DOWNTO 0),
+    M_AXI_ARLEN   => ARLEN_W,
     M_AXI_ARSIZE  => M_AXI_ARSIZE,
     M_AXI_ARBURST => M_AXI_ARBURST,
     M_AXI_ARLOCK  => M_AXI_ARLOCK,
@@ -181,24 +182,24 @@ BEGIN
   );
 
   reference_buf : bram_buf PORT MAP(
-    refclk => refclk,        --! reference clock expect 250Mhz
-    rst    => rst_w,         --! sync active high reset. sync -> refclk
-    addr   => ref_buf_adr_w, -- адрес ячейки в буфере (от 0 до 14)
-    re     => ref_re_w,      -- read enable
-    we     => ref_we_w,      -- write enable (поднять для записи)
-    data_i => ref_data_i_w,  -- data input
-    data_o => ref_data_o_w,  -- data output
+    refclk => refclk,          --! reference clock expect 250Mhz
+    rst    => rst_w,           --! sync active high reset. sync -> refclk
+    addr   => ref_buf_adr_w,   -- адрес ячейки в буфере (от 0 до 14)
+    re     => ref_re_w,        -- read enable
+    we     => ref_we_w,        -- write enable (поднять для записи)
+    data_i => data_from_axi_w, -- data input
+    data_o => ref_data_o_w,    -- data output
     valid  => ref_valid_w
   );
 
   signal_bufer : bram_buf PORT MAP(
-    refclk => refclk,        --! reference clock expect 250Mhz
-    rst    => rst_w,         --! sync active high reset. sync -> refclk
-    addr   => sig_buf_adr_w, -- адрес ячейки в буфере (от 0 до 14)
-    re     => sig_re_w,      -- read enable
-    we     => sig_we_w,      -- write enable (поднять для записи)
-    data_i => sig_data_i_w,  -- data input
-    data_o => sig_data_o_w,  -- data output
+    refclk => refclk,          --! reference clock expect 250Mhz
+    rst    => rst_w,           --! sync active high reset. sync -> refclk
+    addr   => sig_buf_adr_w,   -- адрес ячейки в буфере (от 0 до 14)
+    re     => sig_re_w,        -- read enable
+    we     => sig_we_w,        -- write enable (поднять для записи)
+    data_i => data_from_axi_w, -- data input
+    data_o => sig_data_o_w,    -- data output
     valid  => sig_valid_w
   );
 
@@ -254,4 +255,8 @@ BEGIN
     END IF;
   END PROCESS;
 
+  output_assign : PROCESS (ARLEN_W)
+  BEGIN
+    M_AXI_ARLEN <= "0000" & ARLEN_W;
+  END PROCESS output_assign;
 END ARCHITECTURE rtl;
