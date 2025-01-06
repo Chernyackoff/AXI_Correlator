@@ -134,6 +134,8 @@ ARCHITECTURE rtl OF AXI_corr_TOP IS
   SIGNAL ref_re_w, ref_we_w, ref_valid_w, sig_re_w, sig_we_w, sig_valid_w, both_re_w : STD_LOGIC;
   SIGNAL ref_data_i_w, ref_data_o_w, sig_data_i_w, sig_data_o_w                      : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
+  SIGNAL valid_w : STD_LOGIC;
+
 BEGIN
   -- port => wire 
   planer_module : planner PORT MAP(
@@ -203,13 +205,14 @@ BEGIN
     valid  => sig_valid_w
   );
 
+  valid_w <= sig_valid_w AND ref_valid_w;
   corr_module : correlator PORT MAP(
     refclk       => refclk,
     rst          => rst_w,
     en           => corr_en_w,
     ref_input    => ref_data_o_w,
     signal_input => sig_data_o_w,
-    valid        => sig_valid_w AND ref_valid_w,
+    valid        => valid_w,
     ref_addr     => both_adr_w,
     bram_re      => both_re_w,
     result       => result_o,

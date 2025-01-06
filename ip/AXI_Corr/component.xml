@@ -223,7 +223,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>49ce1179</spirit:value>
+            <spirit:value>bf2d95e9</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -239,7 +239,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>49ce1179</spirit:value>
+            <spirit:value>bf2d95e9</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -668,7 +668,7 @@
       <spirit:file>
         <spirit:name>src/work/AXI_corr_TOP.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_60b171fd</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_0c1d9fb7</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
         <spirit:logicalName>work</spirit:logicalName>
       </spirit:file>
@@ -775,25 +775,25 @@
       <xilinx:displayName>AXI_Corr</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2025-01-06T16:46:00Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2025-01-06T19:23:10Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@123b3128_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@41cee63b_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@5c638ad1_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@2c91fe70_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@2ac6015_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@17969f83_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@5671149b_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@12c6a135_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@266f8dfd_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.df@5105468b_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@44c8ebef_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@43515dc_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@97eac38_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@650a94ea_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5556c3f9_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@31f2033e_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@44c08853_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@471deb88_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@789b6be3_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5b69bb64_ARCHIVE_LOCATION">c:/Homework/Master_Degree/Term1/SBIS/AXI_correlator/ip/AXI_Corr</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2021.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="a5eb2d1e"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="fa820a90"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="72fb1102"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="2c12788a"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="b0c8530d"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="552470b5"/>
     </xilinx:packagingInfo>
