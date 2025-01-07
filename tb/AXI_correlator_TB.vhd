@@ -45,6 +45,7 @@ BEGIN
 
   test_bench_main : PROCESS
   BEGIN
+    wait until rising_edge(refclk);
     IF (res = '1') THEN
       test_completed <= true;
       WAIT;
