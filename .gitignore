@@ -74,3 +74,4 @@
 #########
 AXI_correlator/*
 ip_src/AXI_correlator
+.cxl.ip

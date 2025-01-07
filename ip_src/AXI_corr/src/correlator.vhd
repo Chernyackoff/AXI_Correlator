@@ -100,21 +100,19 @@ BEGIN
   BEGIN
     IF (rising_edge(refclk)) THEN
       IF (cur_state = idle) THEN
-        corr_sum <= 0;
-        ref_sum  <= 0;
-        counter  <= 0;
-      END IF;
-
-      IF (cur_state = working AND data_ready AND NOT work_ended) THEN
-        counter  <= counter + 1;
+        corr_sum   <= 0;
+        ref_sum    <= 0;
+        counter    <= 0;
+        work_ended <= false;
+      ELSIF (cur_state = working AND data_ready AND NOT work_ended) THEN
         corr_sum <= corr_sum + to_integer(signed(data_ref)) * to_integer(signed(data_sig));
         ref_sum  <= ref_sum + to_integer(signed(data_ref)) * to_integer(signed(data_ref));
-
         IF (counter > 13) THEN
           work_ended <= true;
+          counter    <= 0;
+        ELSE
+          counter <= counter + 1;
         END IF;
-      ELSE
-        work_ended <= false;
       END IF;
     END IF;
   END PROCESS;

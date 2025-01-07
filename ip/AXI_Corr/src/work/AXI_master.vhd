@@ -59,7 +59,7 @@ BEGIN
   send_data : PROCESS (refclk, read_complete_w)
   BEGIN
     IF (rst = '1') THEN
-      read_addr_w   <= 32B"ZZZZ";
+      read_addr_w   <= 32B"0";
       write_addr    <= "0000";
       read_data     <= 32B"0";
       read_complete <= '0';
@@ -79,7 +79,7 @@ BEGIN
           END IF;
         END IF;
       ELSE
-        read_addr_w   <= 32B"ZZZZ";
+        read_addr_w   <= 32B"0";
         read_complete <= '0';
       END IF;
     END IF;
